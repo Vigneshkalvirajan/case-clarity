@@ -29,14 +29,12 @@ export class ApiError extends Error {
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   let res: Response;
+  const isFormData = init?.body instanceof FormData;
+  const headers: HeadersInit = isFormData
+    ? ((init?.headers ?? {}) as HeadersInit)
+    : { "Content-Type": "application/json", ...((init?.headers ?? {}) as Record<string, string>) };
   try {
-    res = await fetch(`${API_BASE}${path}`, {
-      headers:
-        init?.body instanceof FormData
-          ? undefined
-          : { "Content-Type": "application/json", ...(init?.headers ?? {}) },
-      ...init,
-    });
+    res = await fetch(`${API_BASE}${path}`, { ...init, headers });
   } catch {
     throw new ApiError("Cannot reach the investigation backend.", 0);
   }
