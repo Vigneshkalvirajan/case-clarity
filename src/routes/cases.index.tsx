@@ -15,7 +15,7 @@ import {
   Pill,
 } from "@/components/forensic";
 
-export const Route = createFileRoute("/cases")({
+export const Route = createFileRoute("/cases/")({
   head: () => ({
     meta: [
       { title: "Cases — Veritas Forensics" },
