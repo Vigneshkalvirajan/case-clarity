@@ -129,7 +129,7 @@ export function EvidenceChip({
   onClick,
 }: {
   evidenceId: string;
-  recordId?: string | null;
+  recordId?: string | null | undefined;
   onClick?: () => void;
 }) {
   return (
@@ -179,7 +179,7 @@ export function ConfidenceMeter({
   label = "Confidence",
   tone = "primary",
 }: {
-  confidence?: number | null;
+  confidence?: number | null | undefined;
   label?: string;
   tone?: "primary" | "ai";
 }) {
