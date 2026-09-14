@@ -76,7 +76,7 @@ function processingTone(status?: string | null): Tone {
   }
 }
 
-export function ProcessingPill({ status }: { status?: string | null }) {
+export function ProcessingPill({ status }: { status?: string | null | undefined }) {
   const tone = processingTone(status);
   const isBusy = ["processing", "queued"].includes((status ?? "").toLowerCase());
   return (
@@ -86,7 +86,7 @@ export function ProcessingPill({ status }: { status?: string | null }) {
   );
 }
 
-export function IntegrityPill({ status }: { status?: string | null }) {
+export function IntegrityPill({ status }: { status?: string | null | undefined }) {
   const key = (status ?? "unknown").toLowerCase();
   const tone: Tone =
     key === "verified" ? "success" : key === "mismatch" ? "destructive" : key === "pending" ? "warning" : "neutral";
@@ -97,13 +97,13 @@ export function IntegrityPill({ status }: { status?: string | null }) {
   );
 }
 
-export function SeverityPill({ severity }: { severity?: string | null }) {
+export function SeverityPill({ severity }: { severity?: string | null | undefined }) {
   const key = (severity ?? "").toLowerCase();
   const tone: Tone = key === "high" ? "destructive" : key === "medium" ? "accent" : "warning";
   return <Pill tone={tone}>{titleCase(severity)} severity</Pill>;
 }
 
-export function ReviewPill({ status }: { status?: string | null }) {
+export function ReviewPill({ status }: { status?: string | null | undefined }) {
   const key = (status ?? "pending").toLowerCase();
   const tone: Tone = key === "confirmed" ? "primary" : key === "dismissed" ? "neutral" : "warning";
   return (
@@ -113,7 +113,7 @@ export function ReviewPill({ status }: { status?: string | null }) {
   );
 }
 
-export function TypeTag({ type }: { type?: string | null }) {
+export function TypeTag({ type }: { type?: string | null | undefined }) {
   return (
     <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
       {evidenceTypeLabel(type)}
@@ -148,7 +148,7 @@ export function EvidenceChip({
   );
 }
 
-export function HashDisplay({ hash }: { hash?: string | null }) {
+export function HashDisplay({ hash }: { hash?: string | null | undefined }) {
   const [copied, setCopied] = useState(false);
   if (!hash) return <span className="font-mono text-[11px] text-muted-foreground">—</span>;
   return (
